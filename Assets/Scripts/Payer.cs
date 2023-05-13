@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Payer : MonoBehaviour
 {
-
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             direction = Vector3.up * strength;
@@ -37,11 +29,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if (other.gameObject.tag == "Obstacle") {
-        FindObjectOfType<GameManager>().GameOver();
-       } else if (other.gameObject.tag == "Scoring") {
-        FindObjectOfType<GameManager>().IncreaseScore();
-       }
+        if (other.gameObject.tag == "Obstacle") {
+            FindObjectOfType<GameManager>().GameOver();
+        } else if (other.gameObject.tag == "Scoring") {
+            FindObjectOfType<GameManager>().IncreaseScore();
+        }
     }
-
 }
