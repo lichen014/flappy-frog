@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public GameObject playButton;
     public GameObject gameOver;
     private int score;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         score = 0;
-        scoreText.text = score.ToString();
+        scoreText.text = "Score:" + score;
 
         playButton.SetActive(false);
         gameOver.SetActive(false);
