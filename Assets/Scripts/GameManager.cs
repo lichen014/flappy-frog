@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameOver;
     private int score;
 
+    public Button restartButton;
+
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -45,10 +48,12 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameOver.SetActive(true);
-        playButton.SetActive(true);
+        if (gameOver == true)
+        {
+            gameOver.SetActive(true);
 
-        Pause();
+            Pause();
+        }
     }
 
     public void IncreaseScore()
@@ -56,4 +61,9 @@ public class GameManager : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
     }
+
+    //public void RestartGame()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //}
 }

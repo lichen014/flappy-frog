@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float gravity = -9.8f;
     public float strength = 5f;
 
+    private float leftBound = -5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,13 @@ public class Player : MonoBehaviour
 
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
+
+        if (transform.position.y <leftBound && gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Game Over");
+
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
