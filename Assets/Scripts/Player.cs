@@ -8,8 +8,10 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 5f;
-
     private float leftBound = -5;
+
+    public bool hasPowerup = false;
+    public GameObject powerupIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,8 @@ public class Player : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -53,5 +57,20 @@ public class Player : MonoBehaviour
         {
             FindObjectOfType<GameManager>().IncreaseScore();
         }
+
+        if (other.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            powerupIndicator.gameObject.SetActive(true);
+            Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
+        }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 }
